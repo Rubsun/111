@@ -1,22 +1,30 @@
-n = int(input())
 
-temporary = 0 #Временная переменная для сравнения с числом "мусорка"
-temporary_min = 0 #Временная переменная для поглучения минимального числа
-answer = 0 #Переменная для ответа
+#Если нам гарантируют что выражение правельно записано, то если мы встречаем вычеслительный знак гарантируется что перед ним будет два числа. По этой логике все и работает. Когда мы что то вычеслили мы это удаляяем.
 
-for i in range(n):
-    number1 = int(input())
-
-    if number1 > temporary: #Начало цикла поиска минимального числа из двух переменных
-        temporary_min = temporary
-    elif number1 < temporary:
-        temporary_min = number1
-    elif number1 == temporary:
-        temporary_min = temporary#Конец цикла поиска
-
-    temporary = number1 #Передаем старую переменную нашей "мусорке"
-    answer += temporary_min #Счетаем сумму минимальных чисел
-    
+string = input().split()
+answer = 0
+i = 0
+while len(string) > 1:
+    for i in range(len(string)):
+        if string[i] == '+':
+            answer = int(string[i-2]) + int(string[i-1])
+            string[i] = str(answer)
+            string.pop(i-1)
+            string.pop(i-2)
+            print(string)
+            break
+        elif string[i] == '-':
+            answer = int(string[i-2]) - int(string[i-1])
+            string[i] = str(answer)
+            string.pop(i-1)
+            string.pop(i-2)
+            print(string)
+            break
+        elif string[i] == '*':
+            answer = int(string[i-2]) * int(string[i-1])
+            string[i] = str(answer)
+            string.pop(i-1)
+            string.pop(i-2)
+            print(string)
+            break
 print(answer)
-
-#Столько думал, а оказалось так легко
